@@ -1,0 +1,56 @@
+subprojects {
+    dependencies {
+        testImplementation 'junit:junit:4.12'
+        androidTestImplementation 'com.android.support.test:runner:1.0.2'
+        androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+        testImplementation 'org.mockito:mockito-core:2.13.0'
+        testImplementation "io.mockk:mockk:1.8.6"
+
+        implementation Libs.kotlinJDK
+
+        implementation Libs.support_appcompat_v7
+
+//        final def projectName = project.getName()
+//        if (projectName != 'basecore') {
+//            api Libs.ARouterLib
+//            kapt Libs.ARouterCompiler
+//            implementation project(':basecore')
+//            if (projectName != 'router') {
+//                implementation project(':router')
+//            }
+//        }
+    }
+}
+
+project(':app') {
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    dependencies {
+
+        implementation fileTree(include: ['*.jar'], dir: 'libs')
+        implementation fileTree(include: ['*.aar'], dir: 'libs')
+
+        implementation Libs.constraint
+
+//        implementation(Libs.qmLib) {
+//            exclude group: 'com.android.support', module: 'appcompat-v7'
+//            exclude group: 'com.android.support', module: 'constraint'
+//            exclude group: 'com.github.bumptech.glide', module: 'glide'
+//        }
+    }
+}
+
+//project(':xxxModule') {
+//    dependencies {
+//        api fileTree(dir: 'libs', include: ['*.jar'])
+//        implementation Libs.kotlinReflectLib
+//        compileOnly Libs.libGson
+//        api Libs.dadaWidgetLib
+//        api Libs.dadaFrameworkLib
+//    }
+//}
