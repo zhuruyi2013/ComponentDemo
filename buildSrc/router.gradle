@@ -1,0 +1,21 @@
+subprojects {
+    android.defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                println("project name=" + project.getName() + " ")
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+
+    if (project.isApplication.toBoolean()) {
+        project.plugins.apply("auto-register")
+        project.autoregister {
+            registerInfo = [['scanInterface'        : 'com.zry.basemodule.component.AndroidComponent',
+                             'codeInsertToClassName': 'com.zry.basemodule.component.ComponentManager',
+                             'registerMethodName'   : 'register']
+
+            ]
+        }
+    }
+}

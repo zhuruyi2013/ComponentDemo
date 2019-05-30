@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.zry.thirdmodule">
+
+
+    <application
+            android:name=".ThirdDebugApplication"
+            android:allowBackup="true"
+            android:label="thirdmodule"
+            android:icon="@mipmap/plane"
+            android:supportsRtl="true"
+            tools:replace="android:label">
+
+        <activity android:name=".ThirdDebugActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+                android:name=".ThirdActivity"
+                android:label="@string/thirdmodule_title_activity_third"
+                android:theme="@style/thirdmodule_AppTheme"></activity>
+    </application>
+
+</manifest>

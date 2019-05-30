@@ -10,15 +10,16 @@ subprojects {
 
         implementation Libs.support_appcompat_v7
 
-//        final def projectName = project.getName()
-//        if (projectName != 'basecore') {
-//            api Libs.ARouterLib
-//            kapt Libs.ARouterCompiler
-//            implementation project(':basecore')
-//            if (projectName != 'router') {
-//                implementation project(':router')
-//            }
-//        }
+        final def projectName = project.getName()
+        if (projectName != 'basemodule') {
+            println("project " + projectName + " apply arouter")
+            api Libs.ARouterLib
+            kapt Libs.ARouterCompiler
+            implementation project(':basemodule')
+            if (projectName != 'routemodule') {
+                implementation project(':routemodule')
+            }
+        }
     }
 }
 
@@ -30,18 +31,58 @@ project(':app') {
         }
     }
 
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
     dependencies {
+
 
         implementation fileTree(include: ['*.jar'], dir: 'libs')
         implementation fileTree(include: ['*.aar'], dir: 'libs')
 
         implementation Libs.constraint
 
+        if (!project(':secondmodule').isApplication.toBoolean()) {
+            implementation project(':secondmodule')
+        }
+
+        if (!project(':thirdmodule').isApplication.toBoolean()) {
+            implementation project(':thirdmodule')
+        }
+
+
 //        implementation(Libs.qmLib) {
 //            exclude group: 'com.android.support', module: 'appcompat-v7'
 //            exclude group: 'com.android.support', module: 'constraint'
 //            exclude group: 'com.github.bumptech.glide', module: 'glide'
 //        }
+    }
+}
+
+project(":basemodule") {
+    dependencies {
+//        implementation Libs.libRxKotlin
+    }
+}
+
+project(":routemodule") {
+    dependencies {
+        api Libs.libRxKotlin
+    }
+}
+
+project(":secondmodule") {
+    dependencies {
+        implementation Libs.constraint
+    }
+}
+
+project(":thirdmodule") {
+    dependencies {
+        implementation Libs.constraint
     }
 }
 
